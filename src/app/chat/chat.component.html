@@ -1,0 +1,23 @@
+<div class="chat-container">
+    <div class="chat-header">Chatbot</div>
+    <div class="chat-messages" id="chat-messages">
+      <div *ngFor="let message of messages" [ngClass]="message.sender">
+        <div class="message" [innerHTML]="message.text"></div>
+        <div *ngIf="message.attachment">
+          <a [href]="message.attachment" target="_blank">View Attachment</a>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input id="file-input" type="file" accept="image/*,application/pdf" style="display: none;" (change)="handleFileInput($event)" />
+      <label for="file-input" class="file-upload-label">
+        <i class="material-icons">attach_file</i>
+      </label>
+      <input type="text" id="new-message" placeholder="Type your message here..." [(ngModel)]="newMessage" />
+      <button id="send-button" (click)="sendMessage()">Send</button>
+    </div>
+    <div class="upload-spinner" id="upload-spinner" [style.display]="uploading ? 'flex' : 'none'">
+      <div class="spinner"></div>
+    </div>
+  </div>
+  
